@@ -37,8 +37,16 @@ namespace Lab6
     class Figure
     {
         private Point[] points;
+        public Point[] Points
+        {
+            get
+            {
+                //sortPoints();
+                return points;
+            }
+        }
         private const double EPS = 0.00001;
-        public Figure(ref Point point1, ref Point point2, ref Point point3, ref Point point4)
+        public Figure(Point point1, Point point2, Point point3, Point point4)
         {
             if ((point1.X == point2.X && point2.X == point3.X) || (point2.X == point3.X && point3.X == point4.X) || (point3.X == point4.X && point4.X == point1.X) || (point4.X == point1.X && point1.X == point2.X))
                 throw new Exception("Points on a straight line!");
@@ -50,10 +58,7 @@ namespace Lab6
             points[2] = point3;
             points[3] = point4;
             sortPoints();
-            point1 = points[0];
-            point2 = points[1];
-            point3 = points[2];
-            point4 = points[3];
+            sortPoints();
         }
 
         private void sortPoints()
