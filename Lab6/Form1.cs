@@ -26,7 +26,15 @@ namespace Lab6
             Point point4 = new Point((float)numericUpDown7.Value, (float)numericUpDown8.Value);
             try
             {
-                figure = new Figure(point1, point2, point3, point4);
+                figure = new Figure(ref point1, ref point2, ref point3, ref point4);
+                numericUpDown1.Value = (decimal)point1.X;
+                numericUpDown2.Value = (decimal)point1.Y;
+                numericUpDown3.Value = (decimal)point2.X;
+                numericUpDown4.Value = (decimal)point2.Y;
+                numericUpDown5.Value = (decimal)point3.X;
+                numericUpDown6.Value = (decimal)point3.Y;
+                numericUpDown7.Value = (decimal)point4.X;
+                numericUpDown8.Value = (decimal)point4.Y;
                 textBox1.Text = figure.GetTypeFigure().ToString();
             }
             catch (Exception ex)

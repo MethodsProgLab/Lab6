@@ -38,19 +38,52 @@ namespace Lab6
     {
         private Point[] points;
         private const double EPS = 0.00001;
-        public Figure(Point point1, Point point2, Point point3, Point point4)
+        public Figure(ref Point point1, ref Point point2, ref Point point3, ref Point point4)
         {
             if ((point1.X == point2.X && point2.X == point3.X) || (point2.X == point3.X && point3.X == point4.X) || (point3.X == point4.X && point4.X == point1.X) || (point4.X == point1.X && point1.X == point2.X))
-                throw new Exception("Точки на одной прямой");
+                throw new Exception("Points on a straight line!");
             if ((point1.Y == point2.Y && point2.Y == point3.Y) || (point2.Y == point3.Y && point3.Y == point4.Y) || (point3.Y == point4.Y && point4.Y == point1.Y) || (point4.Y == point1.Y && point1.Y == point2.Y))
-                throw new Exception("Точки на одной прямой");
+                throw new Exception("Points on a straight line!");
             points = new Point[4];
             points[0] = point1;
             points[1] = point2;
             points[2] = point3;
             points[3] = point4;
+            sortPoints();
+            point1 = points[0];
+            point2 = points[1];
+            point3 = points[2];
+            point4 = points[3];
         }
 
+        private void sortPoints()
+        {
+            double xCentral = (points[0].X + points[1].X + points[2].X) / 3;
+            double yCentral = (points[0].Y + points[1].Y + points[2].Y) / 3;
+            Point pointCentral = new Point(xCentral, yCentral);
+            double [] angles = new double[4];
+            for (int j = 0; j < points.Length; j++)
+            {
+                for (int i = 0; i < points.Length; i++)
+                {
+                    if (i == j)
+                        continue;
+                    angles[i] = getAngle(points[j], pointCentral, points[i]);
+                }
+                for (int i = 0; i < points.Length; i++)
+                {
+                    if (i == j || i == (j + 1) % points.Length)
+                        continue;
+
+                    if (angles[i] < angles[(j + 1) % points.Length])
+                    {
+                        var tmp = points[i];
+                        points[i] = points[(j + 1) % points.Length];
+                        points[(j + 1) % points.Length] = tmp;
+                    }
+                }
+            }
+        }
         private double getAngle(Point point1, Point point2, Point point3)
         {
             Point a = new Point(point2.X - point1.X, point2.Y - point1.Y);
