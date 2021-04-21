@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lab6
+namespace FigureLab
 {
     public partial class Form1 : Form
     {

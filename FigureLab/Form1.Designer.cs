@@ -1,5 +1,5 @@
 ﻿
-namespace Lab6
+namespace FigureLab
 {
     partial class Form1
     {
