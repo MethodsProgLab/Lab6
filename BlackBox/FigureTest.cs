@@ -18,6 +18,13 @@ namespace BlackBox
         }
 
         [Test]
+        public void NotEnoughDots()
+        {
+            var points = new Point[3];
+            Assert.Catch(() => new Figure(points));
+        }
+
+        [Test]
         public void CheckForInvalid()
         {
             var points = new Point[4];
